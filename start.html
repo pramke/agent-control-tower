@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>启动命令</title></head>
+<body style="background:#f1f5f9">
+
+<!--
+  ============================================================
+  Agent Control Tower — 启动命令
+  ============================================================
+
+  首次启动（PowerShell 项目根目录）：
+  ─────────────────────────────
+  $env:DATABASE_URL="sqlite+aiosqlite:///./act2.db"
+  $env:SECRET_KEY="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+  python start.py
+
+  前端（PowerShell 新窗口）：
+  ─────────────────────────────
+  cd frontend
+  npm run dev
+
+  ── 账户 ─────────────────────────────
+  首个注册用户自动获得 admin 角色
+  后续注册默认 role=member
+  注册接口：POST /api/auth/register
+  ─────────────────────────────────────
+
+  启动后访问：
+  ─────────────────────────────
+  前端        http://localhost:3000
+  Swagger     http://localhost:8001/docs
+  健康检查    http://localhost:8001/health/live
+  指标        http://localhost:8001/metrics
+
+  模式一（Proxy 监控）：
+  ─────────────────────────────
+  LLM 调用改为 http://localhost:8001/proxy 即可
+  无需修改代码或安装 SDK
+
+  模式二（SDK 追踪）：
+  ─────────────────────────────
+  pip install -e act-sdk
+  from act_sdk import init, observe
+  init(project_id=1, api_key="tg_xxx")
+  @observe()  # 装饰器自动追踪
+
+  角色权限：
+  ─────────────────────────────
+  member  → 项目列表 + 常规使用
+  manager → 项目管理、统计、检测、评估、审批
+  admin   → 全部功能 + 用户管理
+  ============================================================
+-->
+
+</body>
+</html>
